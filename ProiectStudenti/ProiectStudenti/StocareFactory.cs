@@ -7,13 +7,13 @@ namespace Teema1
     {
         private const string FORMAT_SALVARE = "FormatSalvare";
         private const string NUME_FISIER = "NumeFisier";
-        private const string NUME_FISIER1 = "NumeFisier1";
+        //private const string NUME_FISIER1 = "NumeFisier1";
 
         public static IStocareData GetAdministratorStocare()
         {
             var formatSalvare = ConfigurationManager.AppSettings[FORMAT_SALVARE];
             var numeFisier = ConfigurationManager.AppSettings[NUME_FISIER];
-            var numeFisier1 = ConfigurationManager.AppSettings[NUME_FISIER1];
+            //var numeFisier1 = ConfigurationManager.AppSettings[NUME_FISIER1];
 
             if (formatSalvare != null)
             {
@@ -23,7 +23,7 @@ namespace Teema1
                     case "bin":
                         return new AdministrareStudenti_FisierBIN(numeFisier + "." + formatSalvare);
                     case "txt":
-                        return new AdministrareStudenti_FisierTXT(numeFisier + "." + formatSalvare,numeFisier1 + "." + formatSalvare);
+                        return new AdministrareStudenti_FisierTXT(numeFisier + "." + formatSalvare);
                 }
             }
 

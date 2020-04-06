@@ -14,24 +14,29 @@ namespace NivelAccesDate
         string NumeFisier { get; set; }
         string NumeFisier1 { get; set; }
 
-        public AdministrareStudenti_FisierTXT(string numefisier_,string numefisier1_)
+        public AdministrareStudenti_FisierTXT(string numefisier_)
         {
             NumeFisier = numefisier_;
-            NumeFisier1 = numefisier1_;
-            Stream FisierText = File.Open(numefisier_, FileMode.Create, FileAccess.ReadWrite);
-            Stream FisierText2 = File.Open(numefisier1_, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            //NumeFisier1 = numefisier1_;
+            Stream FisierText = File.Open(numefisier_, FileMode.OpenOrCreate);
+             
+            //Stream FisierText2 = File.Open(numefisier1_, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             FisierText.Close();
-            FisierText2.Close();
+            //FisierText2.Close();
 
         }
 
+        public void StergeFisier()
+        {
+            File.WriteAllText(NumeFisier, string.Empty);
+        }
         public void AddStudent(Student s)
         {
             try
-            {             
+            {              
                 using (StreamWriter swFisierText = new StreamWriter(NumeFisier, true))
                 {
-                    swFisierText.WriteLine(s.ConversieLaSir());
+                    swFisierText.WriteLine(s.ConversieLaSirFisier());
                 }
                           
             }
@@ -52,7 +57,7 @@ namespace NivelAccesDate
            try
            {
                // instructiunea 'using' va apela sr.Close()
-               using (StreamReader sr = new StreamReader(NumeFisier1))
+               using (StreamReader sr = new StreamReader(NumeFisier))
                {
                    string line;
                    nrStudenti = nrstd;

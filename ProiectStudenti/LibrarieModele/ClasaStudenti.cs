@@ -31,36 +31,37 @@ namespace LibrarieModele
             get;
             set;
         }
+
         public static  int IDultim { get; set; }
-        public string nume { get; set; }
-        public string prenume { get; set; }
-        public double nota { get; set; }
-        public string status { get; set; }
-        public string numecomplet { get; set; }
+        public string Nume { get; set; }
+        public string Prenume { get; set; }
+        public double Nota { get; set; }
+        public string Status { get; set; }
+        public string Numecomplet { get; set; }
 
         public Student()
         {
-            nota = 0;
-            nume = string.Empty;
-            prenume = string.Empty;
-            status = string.Empty;
-            numecomplet = nume + ' ' + prenume;
+            Nota = 0;
+            Nume = string.Empty;
+            Prenume = string.Empty;
+            Status = string.Empty;
+            Numecomplet = Nume + ' ' + Prenume;
             IDultim++;
         }
 
         public Student(string nume_, string prenume_, double nota_)
         {
-            nota = nota_;
-            nume = nume_;
-            prenume = prenume_;
-            numecomplet = nume + ' ' + prenume;
+            Nota = nota_;
+            Nume = nume_;
+            Prenume = prenume_;
+            Numecomplet = Nume + ' ' + Prenume;
             IDultim++;
         }
 
         public string ConversieLaSir()
         {
             //return string.Format("Elevul {0} de la {1}  are nota {2} si este admis si are optiunea {3}", numecomplet, Facultate, nota,Optiune);
-            if (status == GOOD)
+            if (Status == GOOD)
                 return string.Format("---------------------------\n" +
                                      "|()    ....     ....    ()|\n" +
                                      "|()    ( .)     (. )    ()|     NUME : {0}    \n" +
@@ -70,7 +71,7 @@ namespace LibrarieModele
                                      "|()      ---------      ()|     Facultatea : {4}\n" +
                                      "|()                     ()|     Optiuni : {5}\n" +
                                      "|()                     ()|\n" +
-                                     "---------------------------", nume,prenume,nota,status,Facultate,Optiune);
+                                     "---------------------------", Nume,Prenume,Nota,Status,Facultate,Optiune);
             else
                 return string.Format("---------------------------\n" +
                                      "|()   ......   ......   ()|\n" +
@@ -81,7 +82,7 @@ namespace LibrarieModele
                                      "|()          __         ()|     Facultatea : {4}\n" +
                                      "|()                     ()|     Optiuni : {5}\n" +
                                      "|()                     ()|\n" +
-                                     "---------------------------", nume, prenume, nota, status, Facultate, Optiune);
+                                     "---------------------------", Nume, Prenume, Nota, Status, Facultate, Optiune);
         }
         public string ConversieLaSirRespins()
         {       
@@ -94,21 +95,26 @@ namespace LibrarieModele
                                      "|()          __         ()|     Facultatea : {4}\n" +
                                      "|()                     ()|     Optiuni : {5}\n" +
                                      "|()                     ()|\n" +
-                                     "---------------------------", nume, prenume, nota, status, Facultate, Optiune);
+                                     "---------------------------", Nume, Prenume, Nota, Status, Facultate, Optiune);
+        }
+
+        public string ConversieLaSirFisier()
+        {
+            return string.Format("{0},{1},{2},{3},{4}", Nume, Prenume, Nota, Convert.ToInt32(Facultate), Convert.ToInt32(Optiune));
         }
 
         public string Afisareresp()
            {
-            if (status == BAD)
-                return string.Format("{0} {1} : nota {2}", nume, prenume, nota);
+            if (Status == BAD)
+                return string.Format("{0} {1} : nota {2}", Nume, Prenume, Nota);
             else
                 return string.Empty;
            }
 
         public string Afisareadmis()
         {
-            if (status == GOOD)
-                return string.Format("{0} {1} : nota {2}", nume, prenume, nota);
+            if (Status == GOOD)
+                return string.Format("{0} {1} : nota {2}", Nume, Prenume, Nota);
             else
                 return string.Empty;
         }
@@ -120,33 +126,33 @@ namespace LibrarieModele
             foreach (string cuv in cuvinte)
             {
                 if (k == NM)
-                    nume = cuv;
+                    Nume = cuv;
                 if (k == PR)
-                    prenume = cuv;
+                    Prenume = cuv;
                 if (k == NT)
-                    nota = Convert.ToDouble(cuv);
+                    Nota = Convert.ToDouble(cuv);
                 if (k == FC)
                     Facultate = (Facultati)Convert.ToInt32(cuv);
-                if (k == OP)
-                    Optiune = (Optiuni)Convert.ToInt32(cuv);       
+                if (k >= OP)
+                    Optiune = Optiune|(Optiuni)Convert.ToInt32(cuv);       
                 k++;
             }
-            if (nota >= MINIM)
-                status = GOOD;
+            if (Nota >= MINIM)
+                Status = GOOD;
             else
-                status = BAD;
-            numecomplet = nume + ' ' + prenume;
+                Status = BAD;
+            Numecomplet = Nume + ' ' + Prenume;
             IDultim++;
         }
 
         public int Compare(Student el)
         {
             int ok = 0;
-            if (this.nota > el.nota)
+            if (this.Nota > el.Nota)
                 ok = MARE;
-            if (this.nota == el.nota)
-                ok = String.Compare(this.nume, el.nume);
-            if (this.nota < el.nota)
+            if (this.Nota == el.Nota)
+                ok = String.Compare(this.Nume, el.Nume);
+            if (this.Nota < el.Nota)
                 ok = MIC;
 
             return ok;

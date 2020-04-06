@@ -22,5 +22,11 @@ namespace NivelAccesDate
         {
             throw new Exception("Optiunea GetStudenti nu este implementata");
         }
+
+        public void StergeFisier()
+        {
+            throw new Exception("Optiunea GetStudenti nu este implementata");
+        }
+
     }
 }

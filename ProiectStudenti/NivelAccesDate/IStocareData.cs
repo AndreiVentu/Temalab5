@@ -11,5 +11,6 @@ namespace NivelAccesDate
     {
         void AddStudent(Student s);
         Student[] GetStudenti(Student[] elev ,out int nrStudenti,int nrstd);
+        void StergeFisier();
     }
 }
